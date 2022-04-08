@@ -1,19 +1,6 @@
-# textbus-vue
+Textbus 集成 Vue 示例
+====================
 
-## Project setup
-```
-npm install
-```
+本项目用于在 Vue 项目内开发 Textbus 组件，由于 Textbus 和 Vue 都有自己的 jsx 工厂函数，所以需要一定的配置，才能让两种工厂函数都正常工作。
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+开发者可参考本项目的配置。
