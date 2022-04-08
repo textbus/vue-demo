@@ -1,18 +1,21 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div>
+    <div ref="editorRef"></div>
+  </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
-
-export default defineComponent({
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-});
+<script lang="ts" setup>
+import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { Editor } from '@textbus/editor';
+import { createTextbusEditor } from '@/textbus/editor';
+const editorRef = ref<HTMLElement>()
+let editor: Editor
+onMounted(() => {
+  editor = createTextbusEditor(editorRef.value!)
+})
+onBeforeUnmount(() => {
+  editor.destroy()
+})
 </script>
 
 <style lang="scss">
