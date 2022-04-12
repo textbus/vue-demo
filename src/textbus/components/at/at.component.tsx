@@ -1,5 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx VElement.createElement */
 import {
   ComponentData,
   ComponentInstance,
@@ -59,9 +57,7 @@ export const atComponent = defineComponent({
               })
 
             }
-            <span style={{
-              position: 'relative'
-            }}>
+            <span style="position:relative">
               <div style={{
                 position: 'absolute'
               }}>

@@ -3,7 +3,6 @@
     "target": "es5",
     "module": "esnext",
     "strict": true,
-    "jsx": "react",
     "importHelpers": true,
     "moduleResolution": "node",
     "skipLibCheck": true,
@@ -11,6 +10,8 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
+    "jsx": "react",
+    "jsxFactory": "VElement.createElement",
     "types": [
       "webpack-env"
     ],

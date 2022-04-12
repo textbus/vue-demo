@@ -1,13 +1,11 @@
-/** @jsxRuntime classic */
-/** @jsx VElement.createElement */
 import {
   ComponentData,
   ComponentInstance,
   ComponentMethods,
   ContentType,
-  defineComponent,
+  defineComponent, onViewInit,
   Slot,
-  SlotRender,
+  SlotRender, useRef,
   useSlots,
   VElement
 } from '@textbus/core'
@@ -23,10 +21,16 @@ export const alertComponent = defineComponent<ComponentMethods>({
       ])
     ])
 
+    const box = useRef<HTMLElement>()
+
+    onViewInit(() => {
+      console.log(box.current)
+    })
+
     return {
       render(isOutputMode: boolean, slotRender: SlotRender): VElement {
         return (
-          <div class="alert">
+          <div class="alert" ref={box}>
             <div>这是 Alert 组件，这里的内容是不可以编辑的</div>
             {
               slotRender(slots.get(0)!, () => {
@@ -45,7 +49,7 @@ export const alertComponentLoader: ComponentLoader = {
   resources: {
     styles: [
       `.alert { border-radius: 3px; border: 1px solid #ccc; background: #eee; padding: 5px 15px}`
-    ]
+    ],
   },
   match(element: HTMLElement): boolean {
     return element.tagName.toLowerCase() === 'div' && element.className === 'alert'
