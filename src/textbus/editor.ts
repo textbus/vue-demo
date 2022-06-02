@@ -8,7 +8,7 @@ import { AtPlugin } from './components/at/at.plugin';
 defaultComponentLoaders.push(alertComponentLoader)
 defaultComponentLoaders.unshift(alertComponentLoader)
 export function createTextbusEditor(host: HTMLElement) {
-  return createEditor(host, {
+  const editor = createEditor({
     plugins: [
       new Toolbar([
         ...defaultTools,
@@ -17,4 +17,6 @@ export function createTextbusEditor(host: HTMLElement) {
       new AtPlugin()
     ]
   })
+  editor.mount(host)
+  return editor
 }

@@ -1,6 +1,5 @@
-import { Plugin } from '@textbus/browser';
 import { Injector } from '@tanbo/di';
-import { Commander, ContentType, Keyboard, Selection } from '@textbus/core';
+import { Commander, ContentType, Keyboard, Selection, Plugin } from '@textbus/core';
 import { atComponent } from './at.component';
 
 export class AtPlugin implements Plugin {
