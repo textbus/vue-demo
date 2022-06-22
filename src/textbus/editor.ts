@@ -10,11 +10,11 @@ defaultComponentLoaders.unshift(alertComponentLoader)
 export function createTextbusEditor(host: HTMLElement) {
   const editor = createEditor({
     plugins: [
-      new Toolbar([
+      () => new Toolbar([
         ...defaultTools,
         alertTool
       ]),
-      new AtPlugin()
+      () => new AtPlugin()
     ]
   })
   editor.mount(host)

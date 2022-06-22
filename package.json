@@ -7,9 +7,9 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "@textbus/browser": "^2.0.0-beta.17",
-    "@textbus/core": "^2.0.0-beta.17",
-    "@textbus/editor": "^2.0.0-beta.17",
+    "@textbus/browser": "^2.0.0-beta.39",
+    "@textbus/core": "^2.0.0-beta.39",
+    "@textbus/editor": "^2.0.0-beta.39",
     "vue": "^3.0.0"
   },
   "devDependencies": {

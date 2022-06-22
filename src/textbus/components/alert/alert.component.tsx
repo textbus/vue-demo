@@ -1,7 +1,7 @@
 import {
   ComponentData,
   ComponentInstance,
-  ComponentMethods,
+  ComponentExtends,
   ContentType,
   defineComponent, onViewInit,
   Slot,
@@ -12,10 +12,10 @@ import {
 import { ComponentLoader, SlotParser } from '@textbus/browser'
 import { Injector } from '@tanbo/di'
 
-export const alertComponent = defineComponent<ComponentMethods>({
+export const alertComponent = defineComponent<ComponentExtends>({
   type: ContentType.BlockComponent,
   name: 'AlertComponent',
-  setup(data?: ComponentData): ComponentMethods {
+  setup(data?: ComponentData): ComponentExtends {
     const slots = useSlots(data?.slots || [new Slot([
         ContentType.Text
       ])
