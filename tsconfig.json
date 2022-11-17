@@ -10,8 +10,8 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "jsx": "react",
-    "jsxFactory": "VElement.createElement",
+    "jsx": "react-jsx",
+    "jsxImportSource": "@textbus/core",
     "types": [
       "webpack-env"
     ],
