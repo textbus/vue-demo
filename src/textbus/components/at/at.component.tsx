@@ -7,7 +7,7 @@ import {
   Slot, useContext, useSelf,
   useSlots,
 } from '@textbus/core';
-import { ComponentLoader, SlotParser } from '@textbus/browser';
+import { ComponentLoader, SlotParser } from '@textbus/platform-browser';
 import { Injector } from '@tanbo/di';
 
 export interface AtComponentOption {
@@ -47,12 +47,12 @@ export const atComponent = defineComponent({
     })
 
     return {
-      render(isOutputMode: boolean, slotRender) {
+      render(slotRender) {
         return (
           <span component-name="AtComponent">@
             {
-              slotRender(slots.get(0)!, () => {
-                return <span/>
+              slotRender(slots.get(0)!, (children) => {
+                return <span>{children}</span>
               })
 
             }

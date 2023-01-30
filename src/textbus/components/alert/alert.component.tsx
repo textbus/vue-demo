@@ -8,7 +8,7 @@ import {
   useSlots,
   VElement, ComponentInitData
 } from '@textbus/core'
-import { ComponentLoader, SlotParser } from '@textbus/browser'
+import { ComponentLoader, SlotParser } from '@textbus/platform-browser'
 import { Injector } from '@tanbo/di'
 
 export const alertComponent = defineComponent<ComponentExtends>({
@@ -27,13 +27,13 @@ export const alertComponent = defineComponent<ComponentExtends>({
     })
 
     return {
-      render(isOutputMode: boolean, slotRender: SlotRender): VElement {
+      render(slotRender: SlotRender): VElement {
         return (
-          <div class="alert" ref={box}>
+          <div class="alert" ref={box as any}>
             <div>这是 Alert 组件，这里的内容是不可以编辑的</div>
             {
-              slotRender(slots.get(0)!, () => {
-                return <div/>
+              slotRender(slots.get(0)!, (children) => {
+                return <div>{children}</div>
               })
             }
           </div>
