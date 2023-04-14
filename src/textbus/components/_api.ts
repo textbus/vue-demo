@@ -1,2 +1,3 @@
-export * from './alert/alert.component'
-export * from './alert/alert.tool'
+export * from './blockqoute/blockquote.component'
+export * from './paragraph/paragraph.component'
+export * from './root/root.component'
