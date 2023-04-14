@@ -1,20 +1,21 @@
 import {
   ComponentInstance,
   ContentType,
-  defineComponent,
+  defineComponent, fromEvent,
   Injector,
   onBreak, onCompositionStart,
-  onContentInsert,
-  onSlotRemove,
+  onContentInsert, onDestroy,
+  onSlotRemove, onViewInit, Renderer,
   Selection,
-  Slot,
-  useContext, useRef,
+  Slot, Subscription,
+  useContext, useRef, useSelf,
   useSlots
 } from '@textbus/core'
 import { ComponentLoader, SlotParser } from '@textbus/platform-browser'
 
 import './root.component.scss'
 import { paragraphComponent } from '@/textbus/components/paragraph/paragraph.component'
+import { LeftToolbarService } from '@/services/left-toolbar.service';
 
 export const rootComponent = defineComponent({
   name: 'RootComponent',
@@ -70,6 +71,34 @@ export const rootComponent = defineComponent({
       } else {
         contentRef.current!.dataset.placeholder = ''
       }
+    })
+    const subs: Subscription[] = []
+    const renderer = injector.get(Renderer)
+    const leftToolbarService = injector.get(LeftToolbarService)
+    const self = useSelf()
+
+    onViewInit(() => {
+      subs.push(
+        // 和 rxjs 有点像
+        fromEvent(contentRef.current!, 'mousemove').subscribe(ev => {
+          let nativeNode = ev.target as HTMLElement
+          while (nativeNode) {
+            const componentInstance = renderer.getComponentByNativeNode(nativeNode)
+            if (componentInstance) {
+              if (componentInstance === self) {
+                leftToolbarService.updateActiveComponent(null)
+                return
+              }
+              leftToolbarService.updateActiveComponent(componentInstance)
+            }
+            nativeNode = nativeNode.parentNode as HTMLElement
+          }
+        })
+      )
+    })
+
+    onDestroy(() => {
+      subs.forEach(item => item.unsubscribe())
     })
 
     return {
