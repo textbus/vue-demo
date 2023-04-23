@@ -12,6 +12,7 @@ import { LeftToolbarService } from '@/services/left-toolbar.service';
 export class Editor extends Viewer {
   constructor() {
     super(rootComponent, rootComponentLoader, {
+      zenCoding: true,
       components: [
         blockquoteComponent,
         paragraphComponent,
