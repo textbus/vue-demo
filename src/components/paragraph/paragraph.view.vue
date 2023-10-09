@@ -1,5 +1,5 @@
 <template>
-  <div data-component="paragraph">
+  <div ref="rootRef" data-component="paragraph">
     <component :is="slotRender()"/>
   </div>
 </template>
@@ -19,7 +19,7 @@ export default defineComponent({
         const slot = props.component.slots.first
         return (
             adapter.slotRender(slot, children => {
-              return createVNode('p', { ref: props.rootRef }, children)
+              return createVNode('p', null, children)
             })
         )
       }
