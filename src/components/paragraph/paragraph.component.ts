@@ -1,10 +1,10 @@
-import { Commander, ContentType, Selection, defineComponent, onBreak, Slot, useContext, useSelf } from '@textbus/core';
+import { Commander, ContentType, Selection, defineComponent, onBreak, Slot, useContext, useSelf } from '@textbus/core'
 
 // 创建 Textbus 段落组件
 export const paragraphComponent = defineComponent({
   name: 'ParagraphComponent',
   type: ContentType.BlockComponent,
-  validate(initData) {
+  validate (initData) {
     return {
       slots: [
         initData?.slots?.[0] || new Slot([
@@ -14,7 +14,7 @@ export const paragraphComponent = defineComponent({
       ]
     }
   },
-  setup() {
+  setup () {
     const context = useContext()
     const commander = useContext(Commander)
     const selection = useContext(Selection)

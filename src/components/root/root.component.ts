@@ -1,11 +1,11 @@
-import { ContentType, defineComponent, onContentInsert, Selection, Slot, useContext } from '@textbus/core';
-import { paragraphComponent } from '@/components/paragraph/paragraph.component';
+import { ContentType, defineComponent, onContentInsert, Selection, Slot, useContext } from '@textbus/core'
+import { paragraphComponent } from '@/components/paragraph/paragraph.component'
 
 // 创建 Textbus 根组件
 export const rootComponent = defineComponent({
   name: 'RootComponent',
   type: ContentType.BlockComponent,
-  validate(initData) {
+  validate (initData) {
     return {
       slots: [
         initData?.slots?.[0] || new Slot([
@@ -17,7 +17,7 @@ export const rootComponent = defineComponent({
     }
   },
 
-  setup() {
+  setup () {
     const selection = useContext(Selection)
     const textbus = useContext()
     // 监听内容插入事件

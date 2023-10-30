@@ -2,12 +2,12 @@ import { BrowserModule } from '@textbus/platform-browser'
 import { Textbus } from '@textbus/core'
 import { createApp } from 'vue'
 import { Adapter } from '@textbus/adapter-vue'
-import { rootComponent } from '@/components/root/root.component';
-import { paragraphComponent } from '@/components/paragraph/paragraph.component';
+import { rootComponent } from '@/components/root/root.component'
+import { paragraphComponent } from '@/components/paragraph/paragraph.component'
 
-import RootView from '@/components/root/root.view.vue';
-import ParagraphView from '@/components/paragraph/paragraph.view.vue';
-import { AdapterInjectToken, TextbusInjectToken } from '@/tokens';
+import RootView from '@/components/root/root.view.vue'
+import ParagraphView from '@/components/paragraph/paragraph.view.vue'
+import { AdapterInjectToken, TextbusInjectToken } from '@/tokens'
 
 // 实例化 Vue 适配器
 const adapter = new Adapter({
