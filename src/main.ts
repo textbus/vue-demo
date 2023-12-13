@@ -23,8 +23,11 @@ const adapter = new Adapter({
   }
 })
 // 实例化浏览器模块
-const browserModule = new BrowserModule(document.getElementById('app')!, {
-  adapter, // 添加 Vue 适配器
+const browserModule = new BrowserModule({
+  adapter, // 添加 Vue 适配器,
+  renderTo (): HTMLElement {
+    return document.getElementById('app')!
+  }
 })
 // 实例化 Textbus
 const textbus = new Textbus({

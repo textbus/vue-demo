@@ -4,7 +4,7 @@ import { Commander, ContentType, Selection, defineComponent, onBreak, Slot, useC
 export const paragraphComponent = defineComponent({
   name: 'ParagraphComponent',
   type: ContentType.BlockComponent,
-  validate (initData) {
+  validate (textbus, initData) {
     return {
       slots: [
         initData?.slots?.[0] || new Slot([
