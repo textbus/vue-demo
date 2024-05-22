@@ -7,9 +7,9 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "@textbus/adapter-vue": "^4.0.0-alpha.20",
-    "@textbus/core": "^4.0.0-alpha.20",
-    "@textbus/platform-browser": "^4.0.0-alpha.20",
+    "@textbus/adapter-vue": "^4.0.0-alpha.46",
+    "@textbus/core": "^4.0.0-alpha.46",
+    "@textbus/platform-browser": "^4.0.0-alpha.46",
     "vue": "^3.2.13"
   },
   "devDependencies": {

@@ -1,33 +1,43 @@
-import { Commander, ContentType, Selection, defineComponent, onBreak, Slot, useContext, useSelf } from '@textbus/core'
+import {
+  Commander,
+  ContentType,
+  Selection,
+  Component,
+  onBreak,
+  Slot,
+  useContext,
+  Textbus, ComponentStateLiteral, Registry,
+} from '@textbus/core'
+
+export interface ParagraphComponentState {
+  slot: Slot
+}
 
 // 创建 Textbus 段落组件
-export const paragraphComponent = defineComponent({
-  name: 'ParagraphComponent',
-  type: ContentType.BlockComponent,
-  validate (textbus, initData) {
-    return {
-      slots: [
-        initData?.slots?.[0] || new Slot([
-          ContentType.Text,
-          ContentType.InlineComponent
-        ])
-      ]
-    }
-  },
+export class ParagraphComponent extends Component<ParagraphComponentState> {
+  static componentName = 'ParagraphComponent'
+  static type = ContentType.BlockComponent
+
+  static fromJSON (textbus: Textbus, state: ComponentStateLiteral<ParagraphComponentState>) {
+    const registry = textbus.get(Registry)
+    return new ParagraphComponent(textbus, {
+      slot: registry.createSlot(state.slot)
+    })
+  }
+
   setup () {
     const context = useContext()
     const commander = useContext(Commander)
     const selection = useContext(Selection)
-    const self = useSelf()
 
     onBreak(ev => {
       ev.preventDefault()
       const nextContent = ev.target.cut(ev.data.index)
-      const p = paragraphComponent.createInstance(context, {
-        slots: [nextContent]
+      const p = new ParagraphComponent(context, {
+        slot: nextContent
       })
-      commander.insertAfter(p, self)
-      selection.selectFirstPosition(p)
+      commander.insertAfter(p, this)
+      selection.setPosition(p.state.slot, 0)
     })
   }
-})
+}

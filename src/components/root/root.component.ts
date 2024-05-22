@@ -1,21 +1,30 @@
-import { ContentType, defineComponent, onContentInsert, Selection, Slot, Textbus, useContext } from '@textbus/core'
-import { paragraphComponent } from '@/components/paragraph/paragraph.component'
+import {
+  ContentType,
+  Component,
+  onContentInsert,
+  Selection,
+  Slot,
+  Textbus,
+  useContext,
+  ComponentStateLiteral, Registry
+} from '@textbus/core'
+import { ParagraphComponent } from '@/components/paragraph/paragraph.component'
+
+export interface RootComponentState {
+  slot: Slot
+}
 
 // 创建 Textbus 根组件
-export const rootComponent = defineComponent({
-  name: 'RootComponent',
-  type: ContentType.BlockComponent,
-  validate (textbus: Textbus, initData) {
-    return {
-      slots: [
-        initData?.slots?.[0] || new Slot([
-          ContentType.Text,
-          ContentType.InlineComponent,
-          ContentType.BlockComponent
-        ])
-      ]
-    }
-  },
+export class RootComponent extends Component<RootComponentState> {
+  static componentName = 'RootComponent'
+  static type = ContentType.BlockComponent
+
+  static fromJSON (textbus: Textbus, state: ComponentStateLiteral<RootComponentState>) {
+    const registry = textbus.get(Registry)
+    return new ParagraphComponent(textbus, {
+      slot: registry.createSlot(state.slot)
+    })
+  }
 
   setup () {
     const selection = useContext(Selection)
@@ -33,8 +42,8 @@ export const rootComponent = defineComponent({
         slot.insert(ev.data.content)
 
         // 创建新的段落组件，并把插槽传给段落组件
-        const p = paragraphComponent.createInstance(textbus, {
-          slots: [slot]
+        const p = new ParagraphComponent(textbus, {
+          slot
         })
         // 在 rootComponent 的插槽内插入新段落
         ev.target.insert(p)
@@ -45,4 +54,4 @@ export const rootComponent = defineComponent({
       }
     })
   }
-})
+}

@@ -1,19 +1,21 @@
 import { BrowserModule } from '@textbus/platform-browser'
-import { Textbus } from '@textbus/core'
+import { ContentType, Slot, Textbus } from '@textbus/core'
 import { createApp } from 'vue'
-import { Adapter } from '@textbus/adapter-vue'
-import { rootComponent } from '@/components/root/root.component'
-import { paragraphComponent } from '@/components/paragraph/paragraph.component'
+import { VueAdapter } from '@textbus/adapter-vue'
+import { RootComponent } from '@/components/root/root.component'
+import { ParagraphComponent } from '@/components/paragraph/paragraph.component'
+
+import './app.css'
 
 import RootView from '@/components/root/root.view.vue'
 import ParagraphView from '@/components/paragraph/paragraph.view.vue'
 import { AdapterInjectToken, TextbusInjectToken } from '@/tokens'
 
 // 实例化 Vue 适配器
-const adapter = new Adapter({
+const adapter = new VueAdapter({
   // 添加渲染组件映射关系
-  [rootComponent.name]: RootView as any,
-  [paragraphComponent.name]: ParagraphView as any
+  [RootComponent.componentName]: RootView as any,
+  [ParagraphComponent.componentName]: ParagraphView as any
 }, (host, root) => {
   // 使用 Vue 渲染 Textbus 视图
   const app = createApp(root).provide(TextbusInjectToken, textbus).provide(AdapterInjectToken, adapter)
@@ -35,13 +37,13 @@ const textbus = new Textbus({
     browserModule
   ],
   components: [
-    rootComponent,
-    paragraphComponent
+    RootComponent,
+    ParagraphComponent
   ]
 })
 
 // 创建根组件实例
-const rootModel = rootComponent.createInstance(textbus)
+const rootModel = new RootComponent(textbus, { slot: new Slot([ContentType.BlockComponent]) })
 
 // 使用 Textbus 启动渲染
 textbus.render(rootModel)
