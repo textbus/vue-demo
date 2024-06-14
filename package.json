@@ -10,7 +10,7 @@
     "@textbus/adapter-vue": "^4.0.0-alpha.59",
     "@textbus/core": "^4.0.0-alpha.59",
     "@textbus/platform-browser": "^4.0.0-alpha.59",
-    "vue": "^3.4.27"
+    "vue": "^3.4.28"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.4.0",
