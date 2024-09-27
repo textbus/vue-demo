@@ -25,6 +25,10 @@ export class ParagraphComponent extends Component<ParagraphComponentState> {
     })
   }
 
+  getSlots() {
+    return [this.state.slot]
+  }
+
   setup () {
     const context = useContext()
     const commander = useContext(Commander)
