@@ -6,7 +6,7 @@ import {
   Slot,
   Textbus,
   useContext,
-  ComponentStateLiteral, Registry
+  type ComponentStateLiteral, Registry
 } from '@textbus/core'
 import { ParagraphComponent } from '@/components/paragraph/paragraph.component'
 
@@ -21,7 +21,7 @@ export class RootComponent extends Component<RootComponentState> {
 
   static fromJSON (textbus: Textbus, state: ComponentStateLiteral<RootComponentState>) {
     const registry = textbus.get(Registry)
-    return new ParagraphComponent(textbus, {
+    return new ParagraphComponent({
       slot: registry.createSlot(state.slot)
     })
   }
@@ -46,7 +46,7 @@ export class RootComponent extends Component<RootComponentState> {
         slot.insert(ev.data.content)
 
         // 创建新的段落组件，并把插槽传给段落组件
-        const p = new ParagraphComponent(textbus, {
+        const p = new ParagraphComponent({
           slot
         })
         // 在 rootComponent 的插槽内插入新段落

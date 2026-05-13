@@ -6,7 +6,7 @@ import {
   onBreak,
   Slot,
   useContext,
-  Textbus, ComponentStateLiteral, Registry,
+  Textbus, type ComponentStateLiteral, Registry,
 } from '@textbus/core'
 
 export interface ParagraphComponentState {
@@ -20,7 +20,7 @@ export class ParagraphComponent extends Component<ParagraphComponentState> {
 
   static fromJSON (textbus: Textbus, state: ComponentStateLiteral<ParagraphComponentState>) {
     const registry = textbus.get(Registry)
-    return new ParagraphComponent(textbus, {
+    return new ParagraphComponent({
       slot: registry.createSlot(state.slot)
     })
   }
@@ -30,14 +30,13 @@ export class ParagraphComponent extends Component<ParagraphComponentState> {
   }
 
   setup () {
-    const context = useContext()
     const commander = useContext(Commander)
     const selection = useContext(Selection)
 
     onBreak(ev => {
       ev.preventDefault()
       const nextContent = ev.target.cut(ev.data.index)
-      const p = new ParagraphComponent(context, {
+      const p = new ParagraphComponent({
         slot: nextContent
       })
       commander.insertAfter(p, this)

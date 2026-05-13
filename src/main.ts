@@ -5,12 +5,12 @@ import { VueAdapter } from '@textbus/adapter-vue'
 import { RootComponent } from '@/components/root/root.component'
 import { ParagraphComponent } from '@/components/paragraph/paragraph.component'
 
-import './app.css'
-
 import RootView from '@/components/root/root.view.vue'
 import ParagraphView from '@/components/paragraph/paragraph.view.vue'
 import { AdapterInjectToken, TextbusInjectToken } from '@/tokens'
 
+// @ts-ignore
+import './app.css'
 // 实例化 Vue 适配器
 const adapter = new VueAdapter({
   // 添加渲染组件映射关系
@@ -43,7 +43,7 @@ const textbus = new Textbus({
 })
 
 // 创建根组件实例
-const rootModel = new RootComponent(textbus, { slot: new Slot([ContentType.BlockComponent]) })
+const rootModel = new RootComponent({ slot: new Slot([ContentType.BlockComponent]) })
 
 // 使用 Textbus 启动渲染
 textbus.render(rootModel)

@@ -6,7 +6,7 @@
 <script lang="ts" setup>
 // 创建视图 Vue 段落组件
 import { inject, defineProps } from 'vue'
-import { ViewComponentProps } from '@textbus/adapter-vue'
+import type { ViewComponentProps } from '@textbus/adapter-vue'
 import { createVNode } from '@textbus/core'
 import { AdapterInjectToken } from '@/tokens'
 import { ParagraphComponent } from '@/components/paragraph/paragraph.component'
